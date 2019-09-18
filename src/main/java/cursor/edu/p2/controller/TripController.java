@@ -33,7 +33,7 @@ public class TripController {
                 .build();
     }
 
-    @GetMapping("/{UserId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<List<Trip>> showTripsByUser(@PathVariable(name = "userId") Long userId) {
         tripService.findByUserId(userId);
         return ResponseEntity
@@ -41,7 +41,7 @@ public class TripController {
                 .build();
     }
 
-    @PostMapping("addNewTrip")
+    @PostMapping
     public ResponseEntity addTrip(@RequestBody Trip trip) {
         tripService.addNewTrip(trip);
         return ResponseEntity
