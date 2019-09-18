@@ -12,11 +12,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("place")
 public class PlaceController {
 
     private final PlaceServiceImpl placeService;
 
-    @GetMapping("place")
+    @GetMapping
     public ResponseEntity<List<Place>> findAllPlaces() {
         placeService.findAllPlaces();
         return ResponseEntity
@@ -24,15 +25,15 @@ public class PlaceController {
                 .build();
     }
 
-    @GetMapping("place/{id}")
-    public ResponseEntity<List<Place>> findPlaceById(@PathVariable(name = "id") Long idPlace) {
-        placeService.findPlacesById(idPlace);
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Place>> findPlaceById(@PathVariable(name = "id") Long placeId) {
+        placeService.findPlacesById(placeId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();
     }
 
-    @PostMapping("place/comment")
+    @PostMapping("/comment")
     public ResponseEntity comment(@RequestBody Comment comment) {
         placeService.commentForPlace(comment);
         return ResponseEntity
@@ -40,7 +41,7 @@ public class PlaceController {
                 .build();
     }
 
-    @PostMapping("place")
+    @PostMapping
     public ResponseEntity addPlace(@RequestBody Place place) {
         placeService.addNewPlace(place);
         return ResponseEntity
@@ -48,9 +49,9 @@ public class PlaceController {
                 .build();
     }
 
-    @DeleteMapping("place")
-    public ResponseEntity deletePlace(@PathVariable(name = "id") Long idPlace) {
-        placeService.deletePlace(idPlace);
+    @DeleteMapping
+    public ResponseEntity deletePlace(@PathVariable(name = "id") Long placeId) {
+        placeService.deletePlace(placeId);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();

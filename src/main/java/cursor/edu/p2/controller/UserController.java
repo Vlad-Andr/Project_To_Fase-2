@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("user")
 public class UserController {
 
     private final UserServiceImpl userService;
 
-    @PostMapping("user")
+    @PostMapping
     public ResponseEntity addUser(@RequestBody User user) {
         userService.addNewUser(user);
         return ResponseEntity
@@ -21,7 +22,7 @@ public class UserController {
                 .build();
     }
 
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable(name = "id") Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity
@@ -29,9 +30,9 @@ public class UserController {
                 .build();
     }
 
-    @PatchMapping("user/{id}")
-    public ResponseEntity updateUser(@PathVariable(name = "id") Long idUser, @RequestBody User newUser) {
-        userService.updateUser(idUser, newUser);
+    @PatchMapping("/{id}")
+    public ResponseEntity updateUser(@PathVariable(name = "id") Long userId, @RequestBody User newUser) {
+        userService.updateUser(userId, newUser);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();

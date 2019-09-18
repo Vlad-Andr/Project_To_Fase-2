@@ -12,11 +12,12 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("trip")
 public class TripController {
 
     private final TripServiceImpl tripService;
 
-    @GetMapping("trip")
+    @GetMapping
     public ResponseEntity<List<Trip>> findAllTrips() {
         tripService.findAllTrips();
         return ResponseEntity
@@ -24,17 +25,17 @@ public class TripController {
                 .build();
     }
 
-    @GetMapping("trip/{idTrip}")
-    public ResponseEntity<Optional<Trip>> findTripById(@PathVariable(name = "idTrip") Long idTrip){
-        tripService.findTripById(idTrip);
+    @GetMapping("/{tripId}")
+    public ResponseEntity<Optional<Trip>> findTripById(@PathVariable(name = "tripId") Long tripId){
+        tripService.findTripById(tripId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();
     }
 
-    @GetMapping("trip/{idUser}")
-    public ResponseEntity<List<Trip>> showTripsByUser(@PathVariable(name = "idUser") Long idUser) {
-        tripService.findByUserId(idUser);
+    @GetMapping("/{UserId}")
+    public ResponseEntity<List<Trip>> showTripsByUser(@PathVariable(name = "userId") Long userId) {
+        tripService.findByUserId(userId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();
@@ -48,17 +49,17 @@ public class TripController {
                 .build();
     }
 
-    @DeleteMapping("trip/{id}")
-    public ResponseEntity deleteTrip(@PathVariable(name = "id") Long idTrip) {
-        tripService.deleteTrip(idTrip);
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTrip(@PathVariable(name = "id") Long tripId) {
+        tripService.deleteTrip(tripId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();
     }
 
-    @PatchMapping("trip/{id}")
-    public ResponseEntity UpdateTrip(@PathVariable(name = "id") Long idTrip, @RequestBody Trip newTrip) {
-        tripService.updateTrip(idTrip, newTrip);
+    @PatchMapping("/{id}")
+    public ResponseEntity UpdateTrip(@PathVariable(name = "id") Long tripId, @RequestBody Trip newTrip) {
+        tripService.updateTrip(tripId, newTrip);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .build();
