@@ -2,6 +2,7 @@ package cursor.edu.p2.controller;
 
 import cursor.edu.p2.model.Comment;
 import cursor.edu.p2.model.Place;
+import cursor.edu.p2.services.CommentServiceImpl;
 import cursor.edu.p2.services.PlaceServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.List;
 public class PlaceController {
 
     private final PlaceServiceImpl placeService;
+    private final CommentServiceImpl commentService;
 
     @GetMapping
     public ResponseEntity<List<Place>> findAllPlaces() {
@@ -35,7 +37,7 @@ public class PlaceController {
 
     @PostMapping("/comment")
     public ResponseEntity comment(@RequestBody Comment comment) {
-        placeService.commentForPlace(comment);
+        commentService.commentForPlace(comment);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();

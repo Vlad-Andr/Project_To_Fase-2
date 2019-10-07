@@ -15,7 +15,6 @@ import java.util.Optional;
 public class PlaceServiceImpl implements PlaceService {
 
     private final PlaceRepo placeRepo;
-    private final CommentRepo commentRepo;
 
     @Override
     public void addNewPlace(Place place) {
@@ -25,11 +24,6 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public void deletePlace(Long idPlace) {
         placeRepo.deleteById(idPlace);
-    }
-
-    @Override
-    public void commentForPlace(Comment comment) {
-        commentRepo.save(comment);
     }
 
     @Override
